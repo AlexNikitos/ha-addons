@@ -147,7 +147,7 @@ def on_message(client, userdata, msg):
         print(f" Error processing message: {e}")
 
 #   MQTT
-mqtt_client = mqtt.Client()
+mqtt_client = mqtt.Client(protocol=mqtt.MQTTv311)
 mqtt_client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
 mqtt_client.on_connect = on_connect
 mqtt_client.on_message = on_message
