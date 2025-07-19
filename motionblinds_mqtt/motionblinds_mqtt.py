@@ -4,21 +4,17 @@ import time
 import os
 from motionblinds import MotionGateway
 
-# Загрузить параметры из UI Home Assistant (из options.json)
-with open("/data/options.json", "r") as f:
-    options = json.load(f)
-
 # 🔹 Настройки MQTT
-MQTT_BROKER = options["mqtt_broker"]
-MQTT_PORT = options["mqtt_port"]
-MQTT_USER = options["mqtt_user"]
-MQTT_PASSWORD = options["mqtt_password"]
-MQTT_TOPIC_STATE = options["mqtt_topic_state"]
-MQTT_TOPIC_COMMAND = options["mqtt_topic_command"]
+MQTT_BROKER = os.getenv("MQTT_BROKER")
+MQTT_PORT = int(os.getenv("MQTT_PORT", "1883"))
+MQTT_USER = os.getenv("MQTT_USER")
+MQTT_PASSWORD = os.getenv("MQTT_PASSWORD")
+MQTT_TOPIC_STATE = os.getenv("MQTT_TOPIC_STATE")
+MQTT_TOPIC_COMMAND = os.getenv("MQTT_TOPIC_COMMAND")
 
 # 🔹 MotionBlinds
-API_KEY = options["api_key"]
-BLINDS = options["blinds"]  # список: [{"ip": "192.168.1.X", "mac": "XXXXXXXXXXXX"}, ...]
+API_KEY = os.getenv("API_KEY")
+BLINDS = json.loads(os.getenv("BLINDS", "[]"))  # список словарей
 
 #    
 print(" Connecting to MotionBlinds...")
