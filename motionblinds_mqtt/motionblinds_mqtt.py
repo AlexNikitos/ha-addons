@@ -1,32 +1,24 @@
 import paho.mqtt.client as mqtt
 import json
 import time
+import os
 from motionblinds import MotionGateway
 
-#   MQTT
-MQTT_BROKER = "192.168.1.53"
-MQTT_PORT = 1883
-MQTT_USER = "mqtt"
-MQTT_PASSWORD = "mqtt"
-MQTT_TOPIC_STATE = "home/motionblinds/{}/state"
-MQTT_TOPIC_COMMAND = "home/motionblinds/set"
+# Загрузить параметры из UI Home Assistant (из options.json)
+with open("/data/options.json", "r") as f:
+    options = json.load(f)
 
-#  MotionBlinds 
-BLINDS = [
-    {"ip": "192.168.1.73", "mac": "3ce90ecc035b"},  #  1 
-    {"ip": "192.168.1.51", "mac": "3ce90ecc1284"},  #  2 
-    {"ip": "192.168.1.131", "mac": "3ce90ecc12d4"}, #  3 
-    {"ip": "192.168.1.42", "mac": "3ce90ecc3218"},  #  4 
-    {"ip": "192.168.1.100", "mac": "3ce90ecc12b5"}, #  5 
-    {"ip": "192.168.1.75", "mac": "3ce90ecc129c"},  #  6 
-    {"ip": "192.168.1.28", "mac": "3ce90ecc21ac"},  #  7 
-    {"ip": "192.168.1.165", "mac": "34945487f8b6"}, #  1 
-    {"ip": "192.168.1.205", "mac": "3ce90ee099b5"}, #  2  
-    {"ip": "192.168.1.69", "mac": "4c752516d468"},  #  3 
+# 🔹 Настройки MQTT
+MQTT_BROKER = options["mqtt_broker"]
+MQTT_PORT = options["mqtt_port"]
+MQTT_USER = options["mqtt_user"]
+MQTT_PASSWORD = options["mqtt_password"]
+MQTT_TOPIC_STATE = options["mqtt_topic_state"]
+MQTT_TOPIC_COMMAND = options["mqtt_topic_command"]
 
-    #    
-]
-API_KEY = "ba9d5168-d623-4f"
+# 🔹 MotionBlinds
+API_KEY = options["api_key"]
+BLINDS = options["blinds"]  # список: [{"ip": "192.168.1.X", "mac": "XXXXXXXXXXXX"}, ...]
 
 #    
 print(" Connecting to MotionBlinds...")
