@@ -1,25 +1,23 @@
 import paho.mqtt.client as mqtt
 import json
 import time
-import os
 from motionblinds import MotionGateway
 
-# 📦 DEBUG: читаем /data/options.json
+# Читаем параметры из файла, созданного Home Assistant
 print("📦 DEBUG: читаем /data/options.json")
 with open("/data/options.json", "r") as f:
-    raw = f.read()
-    print("📄 Содержимое options.json:")
-    print(raw)
-    options = json.loads(raw)
+    options = json.load(f)
 
+print("📄 Содержимое options.json:")
+print(json.dumps(options, indent=2))
 
-# 🔹 Настройки MQTT
-MQTT_BROKER = os.getenv("MQTT_BROKER")
-MQTT_PORT = int(os.getenv("MQTT_PORT", "1883"))
-MQTT_USER = os.getenv("MQTT_USER")
-MQTT_PASSWORD = os.getenv("MQTT_PASSWORD")
-MQTT_TOPIC_STATE = os.getenv("MQTT_TOPIC_STATE")
-MQTT_TOPIC_COMMAND = os.getenv("MQTT_TOPIC_COMMAND")
+# Настройки MQTT
+MQTT_BROKER = options["mqtt_broker"]
+MQTT_PORT = options["mqtt_port"]
+MQTT_USER = options["mqtt_user"]
+MQTT_PASSWORD = options["mqtt_password"]
+MQTT_TOPIC_STATE = options["mqtt_topic_state"]
+MQTT_TOPIC_COMMAND = options["mqtt_topic_command"]
 
 # 🔹 MotionBlinds настройки
 BLINDS = [
