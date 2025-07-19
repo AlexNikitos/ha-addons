@@ -10,3 +10,45 @@ arch:
 ingress: false
 host_network: true
 init: false
+
+options:
+  mqtt_broker: "192.168.1.53"
+  mqtt_port: 1883
+  mqtt_user: "mqtt"
+  mqtt_password: "mqtt"
+  mqtt_topic_state: "home/motionblinds/{}/state"
+  mqtt_topic_command: "home/motionblinds/set"
+  api_key: "ba9d5168-d623-4f"
+  blinds:
+    - ip: "192.168.1.73"
+      mac: "3ce90ecc035b"
+    - ip: "192.168.1.51"
+      mac: "3ce90ecc1284"
+    - ip: "192.168.1.131"
+      mac: "3ce90ecc12d4"
+    - ip: "192.168.1.42"
+      mac: "3ce90ecc3218"
+    - ip: "192.168.1.100"
+      mac: "3ce90ecc12b5"
+    - ip: "192.168.1.75"
+      mac: "3ce90ecc129c"
+    - ip: "192.168.1.28"
+      mac: "3ce90ecc21ac"
+    - ip: "192.168.1.165"
+      mac: "34945487f8b6"
+    - ip: "192.168.1.205"
+      mac: "3ce90ee099b5"
+    - ip: "192.168.1.69"
+      mac: "4c752516d468"
+
+schema:
+  mqtt_broker: str
+  mqtt_port: int
+  mqtt_user: str
+  mqtt_password: str
+  mqtt_topic_state: str
+  mqtt_topic_command: str
+  api_key: str
+  blinds:
+    - ip: str
+      mac: str
