@@ -1,0 +1,12 @@
+name: "MotionBlinds MQTT"
+version: "1.0"
+slug: "motionblinds_mqtt"
+description: "Bridge between MotionBlinds and MQTT using motionblinds library"
+startup: application
+boot: auto
+arch:
+  - aarch64
+  - armv7
+ingress: false
+host_network: true
+init: false
