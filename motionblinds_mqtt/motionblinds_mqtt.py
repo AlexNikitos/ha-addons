@@ -4,6 +4,15 @@ import time
 import os
 from motionblinds import MotionGateway
 
+# 📦 DEBUG: читаем /data/options.json
+print("📦 DEBUG: читаем /data/options.json")
+with open("/data/options.json", "r") as f:
+    raw = f.read()
+    print("📄 Содержимое options.json:")
+    print(raw)
+    options = json.loads(raw)
+
+
 # 🔹 Настройки MQTT
 MQTT_BROKER = os.getenv("MQTT_BROKER")
 MQTT_PORT = int(os.getenv("MQTT_PORT", "1883"))
