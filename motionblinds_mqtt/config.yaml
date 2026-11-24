@@ -1,5 +1,5 @@
 name: "MotionBlinds MQTT"
-version: "1.0"
+version: "1.1"
 slug: "motionblinds_mqtt"
 description: "Bridge between MotionBlinds and MQTT using motionblinds library"
 startup: application
@@ -15,10 +15,10 @@ options:
   mqtt_broker: core-mosquitto
   mqtt_port: 1883
   mqtt_user: "mqtt"
-  mqtt_password: "mqtt"
+  mqtt_password: ""
   mqtt_topic_state: "home/motionblinds/{}/state"
   mqtt_topic_command: "home/motionblinds/set"
-  api_key: "ba9d5168-d623-4f"
+  api_key: ""
   blinds:
     - ip: "192.168.1.73"
       mac: "3ce90ecc035b"
@@ -52,3 +52,4 @@ schema:
   blinds:
     - ip: str
       mac: str
+      api_key: str?
